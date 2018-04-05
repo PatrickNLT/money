@@ -27,8 +27,8 @@ class Money
     #
     # @example
     #   Money.ca_dollar(100).format #=> "$1.00"
-    #   Money.ca_dollar(100).format(with_currency: true) #=> "$1.00 CAD"
-    #   Money.us_dollar(85).format(with_currency: true)  #=> "$0.85 USD"
+    #   Money.ca_dollar(100).format(with_currency: true) #=> "$1.00 CAD"
+    #   Money.us_dollar(85).format(with_currency: true)  #=> "$0.85 USD"
     #
     # @option rules [Boolean] :rounded_infinite_precision (false) Whether the
     #  amount of money should be rounded when using {infinite_precision}
@@ -147,7 +147,7 @@ class Money
     #
     # @example
     #   Money.ca_dollar(570).format(html_wrap: true, with_currency: true)
-    #   #=> "<span class=\"money-currency-symbol\">$</span><span class=\"money-whole\">5</span><span class=\"money-decimal-mark\">.</span><span class=\"money-decimal\">70</span> <span class=\"money-currency\">CAD</span>"
+    #   #=> "<span class=\"money-currency-symbol\">$</span><span class=\"money-whole\">5</span><span class=\"money-decimal-mark\">.</span><span class=\"money-decimal\">70</span> <span class=\"money-currency\">CAD</span>"
     #
     # @option rules [Boolean] :sign_before_symbol (false) Whether the sign should be
     #  before the currency symbol.
@@ -215,7 +215,7 @@ class Money
     # with the symbol (if present) and `%n` will be replaced with the number.
     #
     # @example
-    #   Money.new(10000, "USD").format(format: '%u %n') #=> "$ 100.00"
+    #   Money.new(10000, "USD").format(format: '%u %n') #=> "$ 100.00"
     #   Money.new(10000, "USD").format(format: '<span>%u%n</span>')  #=> "<span>$100.00</span>"
     #
     # Note that the default rules can be defined through {Money.default_formatting_rules} hash.
@@ -303,7 +303,7 @@ class Money
 
     def append_currency_symbol(formatted_number)
       if rules[:with_currency]
-        formatted_number << " "
+        formatted_number << " "
 
         if rules[:html]
           formatted_number << "<span class=\"currency\">#{currency.to_s}</span>"

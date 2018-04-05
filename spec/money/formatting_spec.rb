@@ -200,14 +200,14 @@ describe Money, "formatting" do
       # Rupees
       expect(one_thousand["INR"]).to eq "₹1,000.00"
       expect(one_thousand["NPR"]).to eq "₨1,000.00"
-      expect(one_thousand["SCR"]).to eq "1,000.00 ₨"
-      expect(one_thousand["LKR"]).to eq "1,000.00 ₨"
+      expect(one_thousand["SCR"]).to eq "1,000.00 ₨"
+      expect(one_thousand["LKR"]).to eq "1,000.00 ₨"
 
       # Brazilian Real
       expect(one_thousand["BRL"]).to eq "R$1.000,00"
 
       # Other
-      expect(one_thousand["SEK"]).to eq "1 000,00 kr"
+      expect(one_thousand["SEK"]).to eq "1 000,00 kr"
       expect(one_thousand["GHC"]).to eq "₵1,000.00"
     end
 
@@ -250,15 +250,15 @@ describe Money, "formatting" do
 
       context 'acknowledges provided rule' do
         it 'acknowledges provided rule' do
-          expect(Money.new(100, 'USD').format(with_currency: true)).to eq '$1.00 USD'
+          expect(Money.new(100, 'USD').format(with_currency: true)).to eq '$1.00 USD'
         end
       end
     end
 
     describe ":with_currency option" do
       specify "(:with_currency option => true) works as documented" do
-        expect(Money.ca_dollar(100).format(with_currency: true)).to eq "$1.00 CAD"
-        expect(Money.us_dollar(85).format(with_currency: true)).to eq "$0.85 USD"
+        expect(Money.ca_dollar(100).format(with_currency: true)).to eq "$1.00 CAD"
+        expect(Money.us_dollar(85).format(with_currency: true)).to eq "$0.85 USD"
       end
     end
 
@@ -266,7 +266,7 @@ describe Money, "formatting" do
       specify "(:with_currency option => true) works as documented" do
         expect(Money.ca_dollar(100).format(no_cents: true)).to eq "$1"
         expect(Money.ca_dollar(599).format(no_cents: true)).to eq "$5"
-        expect(Money.ca_dollar(570).format(no_cents: true, with_currency: true)).to eq "$5 CAD"
+        expect(Money.ca_dollar(570).format(no_cents: true, with_currency: true)).to eq "$5 CAD"
         expect(Money.ca_dollar(39000).format(no_cents: true)).to eq "$390"
       end
 
@@ -275,21 +275,21 @@ describe Money, "formatting" do
       end
 
       it "inserts thousand separators if symbol contains decimal mark and no_cents is true" do
-        expect(Money.new(100000000, "AMD").format(no_cents: true)).to eq "1,000,000 դր."
+        expect(Money.new(100000000, "AMD").format(no_cents: true)).to eq "1,000,000 դր."
         expect(Money.new(100000000, "USD").format(no_cents: true)).to eq "$1,000,000"
-        expect(Money.new(100000000, "RUB").format(no_cents: true)).to eq "1.000.000 ₽"
+        expect(Money.new(100000000, "RUB").format(no_cents: true)).to eq "1.000.000 ₽"
       end
 
       it "doesn't incorrectly format HTML" do
         money = ::Money.new(1999, "RUB")
         output = money.format(html: true, no_cents: true)
-        expect(output).to eq "19 &#x20BD;"
+        expect(output).to eq "19 &#x20BD;"
       end
 
       it "doesn't incorrectly format HTML (html_wrap)" do
         money = ::Money.new(1999, "RUB")
         output = money.format(html_wrap: true, no_cents: true)
-        expect(output).to eq "<span class=\"money-whole\">19</span> <span class=\"money-currency-symbol\">&#x20BD;</span>"
+        expect(output).to eq "<span class=\"money-whole\">19</span> <span class=\"money-currency-symbol\">&#x20BD;</span>"
       end
     end
 
@@ -351,17 +351,17 @@ describe Money, "formatting" do
         # Rupees
         expect(one["INR"]).to eq "₹1.00"
         expect(one["NPR"]).to eq "₨1.00"
-        expect(one["SCR"]).to eq "1.00 ₨"
-        expect(one["LKR"]).to eq "1.00 ₨"
+        expect(one["SCR"]).to eq "1.00 ₨"
+        expect(one["LKR"]).to eq "1.00 ₨"
 
         # Brazilian Real
         expect(one["BRL"]).to eq "R$1,00"
 
         # Vietnamese Dong
-        expect(one["VND"]).to eq "100 ₫"
+        expect(one["VND"]).to eq "100 ₫"
 
         # Other
-        expect(one["SEK"]).to eq "1,00 kr"
+        expect(one["SEK"]).to eq "1,00 kr"
         expect(one["GHC"]).to eq "₵1.00"
       end
 
@@ -374,7 +374,7 @@ describe Money, "formatting" do
       specify "(symbol: some non-Boolean value that evaluates to true) returns symbol based on the given currency code" do
         expect(Money.new(100, "GBP").format(symbol: true)).to eq "£1.00"
         expect(Money.new(100, "EUR").format(symbol: true)).to eq "€1,00"
-        expect(Money.new(100, "SEK").format(symbol: true)).to eq "1,00 kr"
+        expect(Money.new(100, "SEK").format(symbol: true)).to eq "1,00 kr"
       end
 
       specify "(symbol: "", nil or false) returns the amount without a symbol" do
@@ -495,12 +495,12 @@ describe Money, "formatting" do
     describe ":html option" do
       specify "(html: true) works as documented" do
         string = Money.ca_dollar(570).format(html: true, with_currency: true)
-        expect(string).to eq "$5.70 <span class=\"currency\">CAD</span>"
+        expect(string).to eq "$5.70 <span class=\"currency\">CAD</span>"
       end
 
       specify "should fallback to symbol if entity is not available" do
         string = Money.new(570, 'DKK').format(html: true)
-        expect(string).to eq "5,70 kr."
+        expect(string).to eq "5,70 kr."
       end
     end
 
@@ -519,12 +519,12 @@ describe Money, "formatting" do
 
       specify "(html_wrap: true, with_currency: true)" do
         string = Money.ca_dollar(570).format(html_wrap: true, with_currency: true)
-        expect(string).to eq "<span class=\"money-currency-symbol\">$</span><span class=\"money-whole\">5</span><span class=\"money-decimal-mark\">.</span><span class=\"money-decimal\">70</span> <span class=\"money-currency\">CAD</span>"
+        expect(string).to eq "<span class=\"money-currency-symbol\">$</span><span class=\"money-whole\">5</span><span class=\"money-decimal-mark\">.</span><span class=\"money-decimal\">70</span> <span class=\"money-currency\">CAD</span>"
       end
 
       specify "should fallback to symbol if entity is not available" do
         string = Money.new(570, 'DKK').format(html_wrap: true)
-        expect(string).to eq "<span class=\"money-whole\">5</span><span class=\"money-decimal-mark\">,</span><span class=\"money-decimal\">70</span> <span class=\"money-currency-symbol\">kr.</span>"
+        expect(string).to eq "<span class=\"money-whole\">5</span><span class=\"money-decimal-mark\">,</span><span class=\"money-decimal\">70</span> <span class=\"money-currency-symbol\">kr.</span>"
       end
     end
 
@@ -534,7 +534,7 @@ describe Money, "formatting" do
       end
 
       it "inserts currency symbol after the amount when set to :after" do
-        expect(Money.us_dollar(1_000_000_000_12).format(symbol_position: :after)).to eq "1,000,000,000.12 $"
+        expect(Money.us_dollar(1_000_000_000_12).format(symbol_position: :after)).to eq "1,000,000,000.12 $"
       end
 
       it "raises an ArgumentError when passed an invalid option" do
@@ -559,7 +559,7 @@ describe Money, "formatting" do
       end
 
       it "inserts space between currency symbol and amount when set to false" do
-        expect(Money.euro(1_234_567_12).format(symbol_position: :before, symbol_before_without_space: false)).to eq "€ 1.234.567,12"
+        expect(Money.euro(1_234_567_12).format(symbol_position: :before, symbol_before_without_space: false)).to eq "€ 1.234.567,12"
       end
 
       it "defaults to true" do
@@ -573,11 +573,11 @@ describe Money, "formatting" do
       end
 
       it "inserts space between amount and currency symbol when set to false" do
-        expect(Money.euro(1_234_567_12).format(symbol_position: :after, symbol_after_without_space: false)).to eq "1.234.567,12 €"
+        expect(Money.euro(1_234_567_12).format(symbol_position: :after, symbol_after_without_space: false)).to eq "1.234.567,12 €"
       end
 
       it "defaults to false" do
-        expect(Money.euro(1_234_567_12).format(symbol_position: :after)).to eq "1.234.567,12 €"
+        expect(Money.euro(1_234_567_12).format(symbol_position: :after)).to eq "1.234.567,12 €"
       end
     end
 
@@ -686,7 +686,7 @@ describe Money, "formatting" do
         expect(money.format(format: '%u')).to eq('$')
         expect(money.format(format: '%u%n')).to eq('$99.99')
         expect(money.format(format: '%n%u')).to eq('99.99$')
-        expect(money.format(format: '%u %n')).to eq('$ 99.99')
+        expect(money.format(format: '%u %n')).to eq('$ 99.99')
         expect(money.format(format: 'Your balance is: %u%n')).to eq('Your balance is: $99.99')
       end
 
@@ -696,12 +696,12 @@ describe Money, "formatting" do
       end
 
       it 'ignores :symbol_before_without_space in favour of format' do
-        expect(money.format(format: '%u %n', symbol_position: :before, symbol_before_without_space: true)).to eq('$ 99.99')
+        expect(money.format(format: '%u %n', symbol_position: :before, symbol_before_without_space: true)).to eq('$ 99.99')
         expect(money.format(format: '%u%n', symbol_position: :before, symbol_before_without_space: false)).to eq('$99.99')
       end
 
       it 'ignores :symbol_after_without_space in favour of format' do
-        expect(money.format(format: '%n %u', symbol_position: :after, symbol_after_without_space: true)).to eq('99.99 $')
+        expect(money.format(format: '%n %u', symbol_position: :after, symbol_after_without_space: true)).to eq('99.99 $')
         expect(money.format(format: '%n%u', symbol_position: :after, symbol_after_without_space: false)).to eq('99.99$')
       end
 
@@ -780,37 +780,37 @@ describe Money, "formatting" do
     it "returns ambiguous signs when disambiguate is not set" do
       expect(Money.new(1999_98, "USD").format).to eq("$1,999.98")
       expect(Money.new(1999_98, "CAD").format).to eq("$1,999.98")
-      expect(Money.new(1999_98, "DKK").format).to eq("1.999,98 kr.")
-      expect(Money.new(1999_98, "NOK").format).to eq("1.999,98 kr")
-      expect(Money.new(1999_98, "SEK").format).to eq("1 999,98 kr")
-      expect(Money.new(1999_98, "BCH").format).to eq("0.00199998 ₿")
+      expect(Money.new(1999_98, "DKK").format).to eq("1.999,98 kr.")
+      expect(Money.new(1999_98, "NOK").format).to eq("1.999,98 kr")
+      expect(Money.new(1999_98, "SEK").format).to eq("1 999,98 kr")
+      expect(Money.new(1999_98, "BCH").format).to eq("0.00199998 ₿")
     end
 
     it "returns ambiguous signs when disambiguate is false" do
       expect(Money.new(1999_98, "USD").format(disambiguate: false)).to eq("$1,999.98")
       expect(Money.new(1999_98, "CAD").format(disambiguate: false)).to eq("$1,999.98")
-      expect(Money.new(1999_98, "DKK").format(disambiguate: false)).to eq("1.999,98 kr.")
-      expect(Money.new(1999_98, "NOK").format(disambiguate: false)).to eq("1.999,98 kr")
-      expect(Money.new(1999_98, "SEK").format(disambiguate: false)).to eq("1 999,98 kr")
-      expect(Money.new(1999_98, "BCH").format(disambiguate: false)).to eq("0.00199998 ₿")
+      expect(Money.new(1999_98, "DKK").format(disambiguate: false)).to eq("1.999,98 kr.")
+      expect(Money.new(1999_98, "NOK").format(disambiguate: false)).to eq("1.999,98 kr")
+      expect(Money.new(1999_98, "SEK").format(disambiguate: false)).to eq("1 999,98 kr")
+      expect(Money.new(1999_98, "BCH").format(disambiguate: false)).to eq("0.00199998 ₿")
     end
 
     it "returns disambiguate signs when disambiguate: true" do
       expect(Money.new(1999_98, "USD").format(disambiguate: true)).to eq("US$1,999.98")
       expect(Money.new(1999_98, "CAD").format(disambiguate: true)).to eq("C$1,999.98")
-      expect(Money.new(1999_98, "DKK").format(disambiguate: true)).to eq("1.999,98 DKK")
-      expect(Money.new(1999_98, "NOK").format(disambiguate: true)).to eq("1.999,98 NOK")
-      expect(Money.new(1999_98, "SEK").format(disambiguate: true)).to eq("1 999,98 SEK")
-      expect(Money.new(1999_98, "BCH").format(disambiguate: true)).to eq("0.00199998 ₿CH")
+      expect(Money.new(1999_98, "DKK").format(disambiguate: true)).to eq("1.999,98 DKK")
+      expect(Money.new(1999_98, "NOK").format(disambiguate: true)).to eq("1.999,98 NOK")
+      expect(Money.new(1999_98, "SEK").format(disambiguate: true)).to eq("1 999,98 SEK")
+      expect(Money.new(1999_98, "BCH").format(disambiguate: true)).to eq("0.00199998 ₿CH")
     end
 
     it "returns disambiguate signs when disambiguate: true and symbol: true" do
       expect(Money.new(1999_98, "USD").format(disambiguate: true, symbol: true)).to eq("US$1,999.98")
       expect(Money.new(1999_98, "CAD").format(disambiguate: true, symbol: true)).to eq("C$1,999.98")
-      expect(Money.new(1999_98, "DKK").format(disambiguate: true, symbol: true)).to eq("1.999,98 DKK")
-      expect(Money.new(1999_98, "NOK").format(disambiguate: true, symbol: true)).to eq("1.999,98 NOK")
-      expect(Money.new(1999_98, "SEK").format(disambiguate: true, symbol: true)).to eq("1 999,98 SEK")
-      expect(Money.new(1999_98, "BCH").format(disambiguate: true, symbol: true)).to eq("0.00199998 ₿CH")
+      expect(Money.new(1999_98, "DKK").format(disambiguate: true, symbol: true)).to eq("1.999,98 DKK")
+      expect(Money.new(1999_98, "NOK").format(disambiguate: true, symbol: true)).to eq("1.999,98 NOK")
+      expect(Money.new(1999_98, "SEK").format(disambiguate: true, symbol: true)).to eq("1 999,98 SEK")
+      expect(Money.new(1999_98, "BCH").format(disambiguate: true, symbol: true)).to eq("0.00199998 ₿CH")
     end
 
     it "returns no signs when disambiguate: true and symbol: false" do

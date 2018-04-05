@@ -81,9 +81,9 @@ class Money
       symbol_position = symbol_position_from(rules)
 
       if symbol_position == :before
-        rules.fetch(:symbol_before_without_space, true) ? '%u%n' : '%u %n'
+        rules.fetch(:symbol_before_without_space, true) ? '%u%n' : '%u %n'
       else
-        rules[:symbol_after_without_space] ? '%n%u' : '%n %u'
+        rules[:symbol_after_without_space] ? '%n%u' : '%n %u'
       end
     end
 
